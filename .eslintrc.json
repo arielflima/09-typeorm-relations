@@ -34,6 +34,7 @@
         "prefixWithI": "always"
       }
     ],
+    "@typescript-eslint/class-name-casing": "off",
     "@typescript-eslint/camelcase": "off",
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
