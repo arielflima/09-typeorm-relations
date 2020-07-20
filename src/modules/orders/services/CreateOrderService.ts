@@ -34,7 +34,7 @@ class CreateOrderService {
     const customer = await this.customersRepository.findById(customer_id);
 
     if (!customer) {
-      throw new AppError('Customer id not exists', 404);
+      throw new AppError('Customer id not exists', 400);
     }
 
     const idOfProducts = products.map(product => ({ id: product.id }));
@@ -44,7 +44,7 @@ class CreateOrderService {
     );
 
     if (products.length !== productsWithPrice.length) {
-      throw new AppError(`There's one or more nonexistent products`, 404);
+      throw new AppError(`There's one or more nonexistent products`, 400);
     }
 
     products.forEach(product => {
@@ -69,8 +69,6 @@ class CreateOrderService {
     });
 
     await this.productsRepository.updateQuantity(products);
-
-    console.log(order);
 
     return order;
   }
