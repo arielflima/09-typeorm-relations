@@ -70,6 +70,8 @@ class CreateOrderService {
 
     await this.productsRepository.updateQuantity(products);
 
+    console.log(order);
+
     return order;
   }
 }

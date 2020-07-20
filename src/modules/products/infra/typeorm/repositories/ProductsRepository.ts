@@ -60,11 +60,9 @@ class ProductsRepository implements IProductsRepository {
         (products.find(({ id }) => id === product.id)?.quantity || 0),
     }));
 
-    const updatedProductsReturned = await this.ormRepository.save(
-      updatedProducts,
-    );
+    await this.ormRepository.save(updatedProducts);
 
-    return updatedProductsReturned;
+    return updatedProducts;
   }
 }
 
