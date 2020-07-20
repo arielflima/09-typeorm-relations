@@ -4,10 +4,21 @@ import { container } from 'tsyringe';
 
 import CreateOrderService from '@modules/orders/services/CreateOrderService';
 import FindOrderService from '@modules/orders/services/FindOrderService';
+import AppError from '@shared/errors/AppError';
 
 export default class OrdersController {
   public async show(request: Request, response: Response): Promise<Response> {
-    // TODO
+    const { id } = request.params;
+
+    const findOrder = container.resolve(FindOrderService);
+
+    const order = await findOrder.execute({ id });
+
+    if (order === undefined) {
+      throw new AppError(`There's no order with this id`);
+    }
+
+    return response.json(order);
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
